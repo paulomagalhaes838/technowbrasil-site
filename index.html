@@ -249,7 +249,76 @@
 </head>
 
 <body>
-  <!-- Conteúdo HTML permanece o mesmo -->
+    <header>
+    <img src="logo.png" alt="Logo Technow Brasil" />
+    <h1>Technow Brasil</h1>
+    <nav>
+      <button id="perfilBtn"><i class="fas fa-user-circle"></i></button>
+      <div class="dropdown" id="perfilDropdown">
+        <a href="#" onclick="toggleAuth()">Login / Cadastro</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section">
+    <section class="products">
+      <h2>Produtos</h2>
+      <div class="product-item">
+        <h3>Produto 1</h3>
+        <p>Descrição breve do produto.</p>
+        <button>Comprar</button>
+      </div>
+    </section>
+
+    <section class="support">
+      <h2>Suporte ao Cliente</h2>
+      <p>Precisa de ajuda? Fale com nosso time de suporte técnico e comercial.</p>
+    </section>
+
+    <section class="feedback">
+      <h2>Feedback</h2>
+      <form>
+        <input type="text" placeholder="Seu nome" required />
+        <textarea rows="4" placeholder="O que achou do site?" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+
+    <section class="auth" id="authSection">
+      <h2>Login / Cadastro</h2>
+      <form>
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Senha" required />
+        <button type="submit">Entrar</button>
+      </form>
+    </section>
+  </main>
+
+  <a href="https://wa.me/5511994545207" id="whatsapp-button" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <footer>
+    &copy; 2025 Technow Brasil. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    const perfilBtn = document.getElementById('perfilBtn');
+    const perfilDropdown = document.getElementById('perfilDropdown');
+    const authSection = document.getElementById('authSection');
+
+    perfilBtn.addEventListener('click', () => {
+      perfilDropdown.style.display =
+        perfilDropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    function toggleAuth() {
+      authSection.style.display =
+        authSection.style.display === 'block' ? 'none' : 'block';
+      perfilDropdown.style.display = 'none';
+    }
+  </script>
+
 </body>
 
 </html>
