@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technow Brasil</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #00ffcc;
+      --secondary: #1f2937;
+      --dark-bg: #0a0f1a;
+      --light-bg: #f0f0f0;
+      --text-light: #fff;
+      --text-dark: #000;
+      --highlight: #3b82f6;
+      --accent: #7c3aed;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+    }
+
+    body.light-mode {
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+    }
+
+    header {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+      animation: slideDown 0.6s ease;
+    }
+
+    header img {
+      height: 60px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+      animation: fadeIn 1s ease;
+    }
+
+    nav {
+      position: relative;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.3rem;
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      color: var(--primary);
+      transform: scale(1.1);
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 40px;
+      background-color: var(--secondary);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      z-index: 2000;
+    }
+
+    .dropdown a {
+      display: block;
+      color: var(--text-light);
+      padding: 0.5rem 0;
+      text-decoration: none;
+    }
+
+    .dropdown a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .section {
+      padding: 3rem 2rem;
+    }
+
+    .products, .support, .feedback, .auth {
+      background-color: var(--secondary);
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.15);
+      animation: fadeInUp 1s ease;
+    }
+
+    .products h2, .support h2, .feedback h2, .auth h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+
+    .auth {
+      display: none;
+    }
+
+    .product-item {
+      background-color: #111;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0, 255, 204, 0.2);
+    }
+
+    .product-item:hover {
+      transform: scale(1.02);
+    }
+
+    .product-item h3 {
+      margin-bottom: 0.5rem;
+      color: var(--highlight);
+    }
+
+    .product-item p {
+      margin-bottom: 0.5rem;
+    }
+
+    .product-item button {
+      background-color: var(--primary);
+      color: #000;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .product-item button:hover {
+      background-color: var(--highlight);
+      color: #fff;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    form button {
+      background-color: var(--primary);
+      color: #000;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    form button:hover {
+      background-color: var(--highlight);
+      color: #fff;
+    }
+
+    #whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      transition: transform 0.3s;
+    }
+
+    #whatsapp-button:hover {
+      transform: scale(1.1);
+    }
+
+    footer {
+      background-color: var(--secondary);
+      padding: 1rem;
+      text-align: center;
+      color: #aaa;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Conteúdo HTML permanece o mesmo -->
+</body>
+
+</html>
