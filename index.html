@@ -354,6 +354,19 @@
         <textarea rows="4" placeholder="O que achou do site?" required></textarea>
         <button type="submit">Enviar</button>
       </form>
+      <section class="feedback">
+  <h2>Feedback</h2>
+  <form id="feedbackForm">
+    <input type="text" id="nome" placeholder="Seu nome" required />
+    <textarea id="mensagem" rows="4" placeholder="O que achou do site?" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div id="cardsContainer" style="margin-top: 2rem;">
+    <!-- Feedbacks aparecerão aqui -->
+  </div>
+</section>
+
     </section>
 
     <section class="auth" id="authSection">
@@ -390,6 +403,46 @@
       perfilDropdown.style.display = 'none';
     }
   </script>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzxGBkV-TNw8s7WpE0jlQtJIa2oCoNDJUsIAU9R8xI_7S8wyoeMPz8xT3zVGmYfU3BG1Q/exec';
+
+  const feedbackForm = document.getElementById("feedbackForm");
+  const cardsContainer = document.getElementById("cardsContainer");
+
+  feedbackForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nome = document.getElementById("nome").value.trim();
+    const mensagem = document.getElementById("mensagem").value.trim();
+
+    fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify({ nome, mensagem }),
+      headers: { "Content-Type": "application/json" },
+    })
+    .then(response => response.json())
+    .then(() => {
+      feedbackForm.reset();
+      carregarFeedbacks();
+    })
+    .catch(error => console.error("Erro ao enviar feedback:", error));
+  });
+
+  function carregarFeedbacks() {
+    fetch(scriptURL)
+      .then(res => res.json())
+      .then(data => {
+        cardsContainer.innerHTML = "";
+        data.reverse().forEach(item => {
+          const card = document.createElement("div");
+          card.className = "product-item";
+          card.innerHTML = `<h3>${item.nome}</h3><p>${item.mensagem}</p>`;
+          cardsContainer.appendChild(card);
+        });
+      });
+  }
+
+  carregarFeedbacks();
+</script>
 
 </body>
 </html>
