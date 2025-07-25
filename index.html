@@ -50,8 +50,8 @@
     }
 
     header img {
-     <img src="imagens/logo-technow.png" alt="Logo Technow Brasil" />
-
+      height: 50px;
+      margin-right: 1rem;
     }
 
     header h1 {
@@ -246,12 +246,70 @@
         transform: translateY(0);
       }
     }
+
+    /* Promoções - barra lateral */
+    .promo-sidebar {
+      position: fixed;
+      top: 100px;
+      left: 0;
+      height: auto;
+      width: 50px;
+      background-color: var(--secondary);
+      color: var(--text-light);
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      overflow: hidden;
+      z-index: 999;
+      transition: width 0.4s ease;
+    }
+
+    .promo-sidebar:hover {
+      width: 250px;
+    }
+
+    .promo-tab {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align: center;
+      padding: 1rem 0;
+      font-weight: bold;
+      background-color: var(--accent);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .promo-content {
+      display: none;
+      padding: 1rem;
+    }
+
+    .promo-sidebar:hover .promo-content {
+      display: block;
+    }
+
+    .promo-content h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: var(--primary);
+      border-bottom: 1px solid var(--primary);
+      padding-bottom: 0.3rem;
+    }
+
+    .promo-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .promo-content ul li {
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 
 <body>
-    <header>
-    <img src="logo.png" alt="Logo Technow Brasil" />
+  <header>
+    <img src="imagens/logo-technow.png" alt="Logo Technow Brasil" />
     <h1>Technow Brasil</h1>
     <nav>
       <button id="perfilBtn"><i class="fas fa-user-circle"></i></button>
@@ -260,6 +318,19 @@
       </div>
     </nav>
   </header>
+
+  <!-- BARRA LATERAL DE PROMOÇÕES -->
+  <div class="promo-sidebar">
+    <div class="promo-tab">Promoções</div>
+    <div class="promo-content">
+      <h3>Ofertas Recentes</h3>
+      <ul>
+        <li>🔥 Desconto de 20% no Produto 1</li>
+        <li>🚀 Frete grátis acima de R$200</li>
+        <li>🎁 Brinde exclusivo para novos clientes</li>
+      </ul>
+    </div>
+  </div>
 
   <main class="section">
     <section class="products">
@@ -321,5 +392,5 @@
   </script>
 
 </body>
-
 </html>
+
