@@ -305,6 +305,35 @@
       font-size: 0.9rem;
     }
   </style>
+  #feedbackList {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--primary);
+}
+
+#feedbackList h3 {
+  color: var(--highlight);
+  margin-bottom: 1rem;
+}
+
+.feedback-card {
+  background-color: #111;
+  border-left: 4px solid var(--accent);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+}
+
+.feedback-card h4 {
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.feedback-card p {
+  font-size: 0.95rem;
+}
+
 </head>
 
 <body>
@@ -348,12 +377,20 @@
     </section>
 
     <section class="feedback">
-      <h2>Feedback</h2>
-      <form>
-        <input type="text" placeholder="Seu nome" required />
-        <textarea rows="4" placeholder="O que achou do site?" required></textarea>
-        <button type="submit">Enviar</button>
-      </form>
+      <section class="feedback">
+  <h2>Feedback</h2>
+  <form id="feedbackForm">
+    <input type="text" id="nome" placeholder="Seu nome" required />
+    <textarea id="mensagem" rows="4" placeholder="O que achou do site?" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <div id="feedbackList">
+    <h3>Feedbacks recebidos</h3>
+    <div id="cardsContainer"></div>
+  </div>
+</section>
+
     </section>
 
     <section class="auth" id="authSection">
@@ -390,6 +427,31 @@
       perfilDropdown.style.display = 'none';
     }
   </script>
+// Feedback interativo
+const feedbackForm = document.getElementById("feedbackForm");
+const cardsContainer = document.getElementById("cardsContainer");
+
+feedbackForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const nome = document.getElementById("nome").value.trim();
+  const mensagem = document.getElementById("mensagem").value.trim();
+
+  if (!nome || !mensagem) return;
+
+  const card = document.createElement("div");
+  card.className = "feedback-card";
+
+  card.innerHTML = `
+    <h4>${nome}</h4>
+    <p>${mensagem}</p>
+  `;
+
+  cardsContainer.prepend(card); // mais recente aparece no topo
+
+  // Limpar campos
+  feedbackForm.reset();
+});
 
 </body>
 </html>
